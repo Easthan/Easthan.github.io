@@ -1,0 +1,4 @@
+# Private notes and local tools (not published)
+notes/
+.claude/
+*.wav

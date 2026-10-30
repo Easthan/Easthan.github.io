@@ -38,34 +38,10 @@
     if (d < today) {
       el.classList.add("is-past");
       el.querySelectorAll("[data-event-label]").forEach(function (label) {
-        label.textContent = el.hasAttribute("data-past-label") ? el.getAttribute("data-past-label") : "Recent";
+        label.textContent = el.getAttribute("data-past-label") || "Recent";
       });
     }
   });
-
-  /* ---------- Work filters ---------- */
-  var filters = document.querySelectorAll(".filter");
-  if (filters.length) {
-    var cards = document.querySelectorAll(".card[data-category]");
-    filters.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var cat = btn.getAttribute("data-filter");
-        filters.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
-        cards.forEach(function (card) {
-          var cats = card.getAttribute("data-category").split(" ");
-          card.hidden = !(cat === "all" || cats.indexOf(cat) !== -1);
-        });
-        drawCovers();
-      });
-    });
-    // Links like work.html?filter=screen open with that category selected
-    var wanted = new URLSearchParams(window.location.search).get("filter");
-    if (wanted) {
-      filters.forEach(function (b) {
-        if (b.getAttribute("data-filter") === wanted) b.click();
-      });
-    }
-  }
 
   /* ---------- Copy short bio ---------- */
   document.querySelectorAll("[data-copy]").forEach(function (btn) {
@@ -90,43 +66,6 @@
     });
   });
 
-  /* ---------- Audio players ---------- */
-  function fmt(s) {
-    if (!isFinite(s)) return "0:00";
-    var m = Math.floor(s / 60);
-    var r = Math.floor(s % 60);
-    return m + ":" + (r < 10 ? "0" : "") + r;
-  }
-  var players = [];
-  document.querySelectorAll(".player").forEach(function (p) {
-    var audio = p.querySelector("audio");
-    var btn = p.querySelector(".player-btn");
-    var range = p.querySelector(".player-range");
-    var time = p.querySelector(".player-time");
-    if (!audio || !btn || !range) return;
-    players.push(audio);
-    var label = btn.getAttribute("aria-label") || "Play";
-    function sync() {
-      if (audio.duration) range.value = (audio.currentTime / audio.duration) * 1000;
-      time.textContent = fmt(audio.currentTime) + " / " + fmt(audio.duration);
-    }
-    btn.addEventListener("click", function () {
-      if (audio.paused) {
-        players.forEach(function (a) { if (a !== audio) a.pause(); });
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    });
-    audio.addEventListener("play", function () { p.classList.add("is-playing"); btn.setAttribute("aria-label", label.replace("Play", "Pause")); });
-    audio.addEventListener("pause", function () { p.classList.remove("is-playing"); btn.setAttribute("aria-label", label); });
-    audio.addEventListener("timeupdate", sync);
-    audio.addEventListener("loadedmetadata", sync);
-    range.addEventListener("input", function () {
-      if (audio.duration) audio.currentTime = (range.value / 1000) * audio.duration;
-    });
-  });
-
   /* ---------- Reveal on scroll ---------- */
   var reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && !reduceMotion) {
@@ -144,13 +83,99 @@
   }
 
   /* ==========================================================================
-     Ridgelines: stacked waveform lines (from my style tile inspiration).
-     Each line is a slice of smooth noise; lower lines are "closer" and
-     hide the ones behind them.
+     Media: only one thing plays at a time. Audio is routed through an
+     analyser so the ridgelines can draw the actual sound.
      ========================================================================== */
 
+  var media = [];
+  function pauseOthers(el) {
+    media.forEach(function (m) { if (m !== el && !m.paused) m.pause(); });
+  }
+  document.querySelectorAll("video").forEach(function (v) {
+    media.push(v);
+    v.addEventListener("play", function () { pauseOthers(v); });
+  });
+
+  var actx = null;
+  function ensureGraph(audio) {
+    // Only reroute audio once the AudioContext is definitely running,
+    // so playback can never end up silent.
+    if (reduceMotion || audio._graph) return;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    try { actx = actx || new AC(); } catch (e) { return; }
+    var connect = function () {
+      if (actx.state !== "running" || audio._graph) return;
+      try {
+        var src = actx.createMediaElementSource(audio);
+        var an = actx.createAnalyser();
+        an.fftSize = 2048;
+        an.smoothingTimeConstant = 0.8;
+        src.connect(an);
+        an.connect(actx.destination);
+        audio._graph = { an: an, buf: new Uint8Array(an.frequencyBinCount), rate: actx.sampleRate };
+      } catch (e) { /* plays normally without the visual */ }
+    };
+    if (actx.state === "running") connect();
+    else actx.resume().then(connect, function () {});
+  }
+
+  function fmt(s) {
+    if (!isFinite(s)) return "0:00";
+    var m = Math.floor(s / 60);
+    var r = Math.floor(s % 60);
+    return m + ":" + (r < 10 ? "0" : "") + r;
+  }
+
+  document.querySelectorAll(".player").forEach(function (p) {
+    var audio = p.querySelector("audio");
+    var btn = p.querySelector(".player-btn");
+    var range = p.querySelector(".player-range");
+    var time = p.querySelector(".player-time");
+    if (!audio || !btn || !range) return;
+    media.push(audio);
+    var label = btn.getAttribute("aria-label") || "Play";
+    function sync() {
+      if (audio.duration) range.value = (audio.currentTime / audio.duration) * 1000;
+      if (time) time.textContent = fmt(audio.currentTime) + " / " + fmt(audio.duration);
+    }
+    btn.addEventListener("click", function () {
+      if (audio.paused) {
+        ensureGraph(audio);
+        var pr = audio.play();
+        if (pr && pr.catch) pr.catch(function () {});
+      } else {
+        audio.pause();
+      }
+    });
+    audio.addEventListener("play", function () {
+      pauseOthers(audio);
+      p.classList.add("is-playing");
+      btn.setAttribute("aria-label", label.replace("Play", "Pause"));
+      wake();
+    });
+    audio.addEventListener("pause", function () { p.classList.remove("is-playing"); btn.setAttribute("aria-label", label); });
+    audio.addEventListener("ended", function () { audio.currentTime = 0; sync(); });
+    audio.addEventListener("timeupdate", sync);
+    audio.addEventListener("loadedmetadata", sync);
+    range.addEventListener("input", function () {
+      if (audio.duration) audio.currentTime = (range.value / 1000) * audio.duration;
+    });
+  });
+
+  /* ==========================================================================
+     Ridgelines: stacked waveform lines (from my style tile inspiration).
+     At rest each line is a slice of smooth noise. While a track plays, each
+     line is a moment of that track's spectrum: newest at the front, older
+     lines scrolling back, with bass in the middle and highs at the edges.
+     ========================================================================== */
+
+  var BG = "#15120F";
+  var BACK = [238, 231, 220];   // cream (far lines)
+  var FRONT = [226, 104, 60];   // ember (near lines)
+  var BINS = 72;
+
   function makeNoise(seed) {
-    // Small seeded value-noise generator
     var s = seed >>> 0;
     function rand() {
       s += 0x6D2B79F5;
@@ -171,9 +196,10 @@
       var a = vals[y0 * SIZE + x0], b = vals[y0 * SIZE + x1];
       var c = vals[y1 * SIZE + x0], d = vals[y1 * SIZE + x1];
       var u = smooth(xf), v = smooth(yf);
-      return (a + (b - a) * u) + ((c + (d - c) * u) - (a + (b - a) * u)) * v;
+      var top = a + (b - a) * u;
+      return top + ((c + (d - c) * u) - top) * v;
     }
-    return function fbm(x, y) {
+    return function (x, y) {
       return n2(x, y) * 0.6 + n2(x * 2.1, y * 2.1) * 0.28 + n2(x * 4.3, y * 4.3) * 0.12;
     };
   }
@@ -191,126 +217,206 @@
     return { ctx: ctx, w: w, h: h };
   }
 
-  function drawRidges(ctx, w, h, o) {
-    ctx.fillStyle = o.bg;
-    if (o.clear) ctx.fillRect(0, 0, w, h);
-    else ctx.clearRect(0, 0, w, h);
-    var lines = o.lines;
-    var step = Math.max(4, w / 180);
-    var sigma = o.spread;
+  function Ridge(canvas, cfg) {
+    this.canvas = canvas;
+    this.cfg = cfg;
+    this.noise = makeNoise(cfg.seed);
+    this.mix = 0;          // 0 = noise, 1 = live spectrum
+    this.hist = [];
+    this.audio = cfg.audio || null;
+    this.center = cfg.center;
+    this.targetCenter = cfg.center;
+    this.visible = true;
+  }
+
+  Ridge.prototype.playing = function () {
+    return !!(this.audio && !this.audio.paused && this.audio._graph);
+  };
+
+  Ridge.prototype.pushSpectrum = function (lines) {
+    var g = this.audio._graph;
+    g.an.getByteFrequencyData(g.buf);
+    var nyq = g.rate / 2, n = g.buf.length;
+    var row = new Float32Array(BINS);
+    for (var j = 0; j < BINS; j++) {
+      var f = 45 * Math.pow(11000 / 45, j / (BINS - 1));
+      var idx = Math.min(n - 1, Math.round((f / nyq) * n));
+      var v = (g.buf[idx] + g.buf[Math.max(0, idx - 1)] + g.buf[Math.min(n - 1, idx + 1)]) / (3 * 255);
+      row[j] = Math.pow(v, 1.7) * (1 - j / (BINS * 2.2));
+    }
+    this.hist.push(row);
+    while (this.hist.length > lines) this.hist.shift();
+  };
+
+  Ridge.prototype.draw = function (now) {
+    var s = sizeCanvas(this.canvas);
+    if (!s) return;
+    var c = this.cfg, ctx = s.ctx, w = s.w, h = s.h;
+    var small = w < 700;
+    var lines = c.lines(w);
+
+    var target = this.playing() ? 1 : 0;
+    this.mix += (target - this.mix) * 0.06;
+    if (Math.abs(target - this.mix) < 0.002) this.mix = target;
+    if (this.playing()) this.pushSpectrum(lines);
+    while (this.hist.length < lines) this.hist.unshift(new Float32Array(BINS));
+
+    this.center += (this.targetCenter - this.center) * 0.04;
+
+    var top = h * c.top(small), bottom = h * c.bottom;
+    var amp = h * c.amp(small);
+    var t = c.animate ? (now || 0) * 0.00005 : c.seed * 0.37;
+    var step = Math.max(4, w / 160);
+    var sigma = c.spread;
+
+    ctx.fillStyle = BG;
+    ctx.fillRect(0, 0, w, h);
+
     for (var i = 0; i < lines; i++) {
       var k = lines === 1 ? 1 : i / (lines - 1);
-      var base = o.top + (o.bottom - o.top) * k;
+      var base = top + (bottom - top) * k;
+      var row = this.hist[i];
       ctx.beginPath();
       ctx.moveTo(0, base);
       for (var x = 0; x <= w + step; x += step) {
         var nx = x / w;
-        var dx = nx - o.center;
-        var env = o.floor + (1 - o.floor) * Math.exp(-(dx * dx) / (2 * sigma * sigma));
-        var n = o.noise(nx * o.freq + o.seedX, i * 0.16 + o.t);
-        var y = base - Math.pow(n, 2.4) * env * o.amp;
-        ctx.lineTo(x, y);
+        var dx = nx - this.center;
+        var env = c.floor + (1 - c.floor) * Math.exp(-(dx * dx) / (2 * sigma * sigma));
+        var nd = this.mix < 1 ? Math.pow(this.noise(nx * c.freq + c.seed * 3.1, i * 0.16 + t), 2.4) : 0;
+        var sd = 0;
+        if (this.mix > 0) {
+          var pos = Math.min(1, Math.abs(nx - 0.5) * 2.1) * (BINS - 1);
+          var i0 = Math.floor(pos), fr = pos - i0;
+          var i1 = Math.min(BINS - 1, i0 + 1);
+          sd = (row[i0] * (1 - fr) + row[i1] * fr) * 1.15;
+        }
+        var d = nd * (1 - this.mix) + sd * this.mix;
+        ctx.lineTo(x, base - d * env * amp);
       }
       ctx.lineTo(w + step, h);
       ctx.lineTo(0, h);
       ctx.closePath();
-      ctx.fillStyle = o.bg;
+      ctx.fillStyle = BG;
       ctx.fill();
-      ctx.strokeStyle = "rgba(" + o.rgb + "," + (0.22 + 0.68 * k).toFixed(3) + ")";
-      ctx.lineWidth = o.lineWidth;
+      var mixK = Math.pow(k, 1.6);
+      var r = Math.round(BACK[0] + (FRONT[0] - BACK[0]) * mixK);
+      var g = Math.round(BACK[1] + (FRONT[1] - BACK[1]) * mixK);
+      var b = Math.round(BACK[2] + (FRONT[2] - BACK[2]) * mixK);
+      ctx.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + (0.16 + 0.74 * k).toFixed(3) + ")";
+      ctx.lineWidth = c.lineWidth;
       ctx.stroke();
     }
-  }
+  };
 
-  /* Hero: slowly drifting lines that lean toward the pointer */
-  var hero = document.querySelector("canvas[data-ridges]");
-  if (hero) {
-    var heroNoise = makeNoise(20261030);
-    var center = 0.62, targetCenter = 0.62;
-    var visible = true;
-    var last = 0;
-    var t0 = performance.now();
+  Ridge.prototype.needsFrame = function () {
+    if (!this.visible) return false;
+    return this.cfg.animate || this.playing() || this.mix > 0;
+  };
 
-    var heroFrame = function (now) {
-      var s = sizeCanvas(hero);
-      if (!s) return;
-      center += (targetCenter - center) * 0.04;
-      var small = s.w < 700;
-      drawRidges(s.ctx, s.w, s.h, {
-        noise: heroNoise,
-        lines: small ? 22 : 34,
-        top: s.h * (small ? 0.5 : 0.36),
-        bottom: s.h * 1.02,
-        amp: s.h * (small ? 0.16 : 0.24),
-        freq: 3.4,
-        seedX: 11.3,
-        center: center,
-        spread: 0.2,
-        floor: 0.18,
-        t: ((now || t0) - t0) * 0.00005,
-        bg: "#0D1016",
-        rgb: "95,175,198",
-        lineWidth: 1.15,
-        clear: true
-      });
-    };
+  var ridges = [];
 
-    var loop = function (now) {
-      if (visible && !document.hidden && now - last > 33) {
-        last = now;
-        heroFrame(now);
-      }
-      requestAnimationFrame(loop);
-    };
-
-    if (reduceMotion) {
-      heroFrame(t0);
-      window.addEventListener("resize", function () { heroFrame(t0); });
-    } else {
-      if ("IntersectionObserver" in window) {
-        new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(hero);
-      }
-      var heroSection = hero.parentElement;
-      heroSection.addEventListener("pointermove", function (e) {
-        var r = heroSection.getBoundingClientRect();
-        targetCenter = 0.15 + 0.7 * ((e.clientX - r.left) / r.width);
-      });
-      heroSection.addEventListener("pointerleave", function () { targetCenter = 0.62; });
-      requestAnimationFrame(loop);
-    }
-  }
-
-  /* Project covers: a still "ridge" image per project, seeded so each differs */
-  function drawCovers() {
-    document.querySelectorAll("canvas[data-cover]").forEach(function (c) {
-      var s = sizeCanvas(c);
-      if (!s) return;
-      var seed = parseInt(c.getAttribute("data-cover"), 10) || 1;
-      var noise = makeNoise(seed * 7919);
-      drawRidges(s.ctx, s.w, s.h, {
-        noise: noise,
-        lines: 20,
-        top: s.h * 0.28,
-        bottom: s.h * 0.98,
-        amp: s.h * 0.55,
-        freq: 2.6 + (seed % 3) * 0.5,
-        seedX: seed * 3.1,
-        center: 0.3 + ((seed * 37) % 40) / 100,
-        spread: 0.16 + (seed % 4) * 0.03,
-        floor: 0.12,
-        t: seed * 0.37,
-        bg: "#0D1016",
-        rgb: "95,175,198",
-        lineWidth: 1,
-        clear: true
-      });
+  // Hero / message-page background
+  document.querySelectorAll("canvas[data-ridges]").forEach(function (cv) {
+    var scope = cv.closest("[data-viz-scope]") || cv.parentElement;
+    var r = new Ridge(cv, {
+      seed: 20261030,
+      audio: scope.querySelector("audio"),
+      animate: !reduceMotion,
+      lines: function (w) { return w < 700 ? 22 : 34; },
+      top: function (small) { return small ? 0.5 : 0.34; },
+      bottom: 1.02,
+      amp: function (small) { return small ? 0.17 : 0.26; },
+      freq: 3.4,
+      center: 0.6,
+      spread: 0.22,
+      floor: 0.18,
+      lineWidth: 1.15
     });
+    ridges.push(r);
+    if (!reduceMotion) {
+      scope.addEventListener("pointermove", function (e) {
+        var b = scope.getBoundingClientRect();
+        r.targetCenter = 0.15 + 0.7 * ((e.clientX - b.left) / b.width);
+      });
+      scope.addEventListener("pointerleave", function () { r.targetCenter = 0.6; });
+    }
+  });
+
+  // Still covers on project cards (they come alive while their track plays)
+  document.querySelectorAll("canvas[data-cover]").forEach(function (cv) {
+    var seed = parseInt(cv.getAttribute("data-cover"), 10) || 1;
+    var scope = cv.closest("[data-viz-scope]");
+    ridges.push(new Ridge(cv, {
+      seed: seed,
+      audio: scope ? scope.querySelector("audio") : null,
+      animate: false,
+      lines: function () { return 22; },
+      top: function () { return 0.26; },
+      bottom: 0.98,
+      amp: function () { return 0.55; },
+      freq: 2.6 + (seed % 3) * 0.5,
+      center: 0.5,
+      spread: 0.17 + (seed % 4) * 0.03,
+      floor: 0.12,
+      lineWidth: 1
+    }));
+  });
+
+  if ("IntersectionObserver" in window) {
+    var vis = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        ridges.forEach(function (r) { if (r.canvas === e.target) r.visible = e.isIntersecting; });
+      });
+      wake();
+    });
+    ridges.forEach(function (r) { vis.observe(r.canvas); });
   }
-  drawCovers();
+
+  function drawAll(force) {
+    ridges.forEach(function (r) { if (force || r.needsFrame()) r.draw(performance.now()); });
+  }
+
+  var running = false, last = 0;
+  function loop(now) {
+    if (!document.hidden && now - last > 33) {
+      last = now;
+      drawAll(false);
+    }
+    if (ridges.some(function (r) { return r.needsFrame(); })) requestAnimationFrame(loop);
+    else running = false;
+  }
+  function wake() {
+    if (!running && !reduceMotion) { running = true; requestAnimationFrame(loop); }
+  }
+
+  drawAll(true);
+  wake();
 
   var resizeTimer;
   window.addEventListener("resize", function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(drawCovers, 120);
+    resizeTimer = setTimeout(function () { drawAll(true); }, 120);
   });
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) wake(); });
+
+  /* ---------- Work filters ---------- */
+  var filters = document.querySelectorAll(".filter");
+  if (filters.length) {
+    var cards = document.querySelectorAll(".card[data-category]");
+    filters.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var cat = btn.getAttribute("data-filter");
+        filters.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        cards.forEach(function (card) {
+          var cats = card.getAttribute("data-category").split(" ");
+          card.hidden = !(cat === "all" || cats.indexOf(cat) !== -1);
+        });
+        drawAll(true);
+      });
+    });
+    var wanted = new URLSearchParams(window.location.search).get("filter");
+    if (wanted) {
+      filters.forEach(function (b) { if (b.getAttribute("data-filter") === wanted) b.click(); });
+    }
+  }
 })();

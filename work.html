@@ -4,22 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Work — Ethan Stirnemann</title>
-  <meta name="description" content="Selected work by Ethan Stirnemann: concert music, film scoring, game audio in Unreal Engine, and electronic music in Ableton Live.">
+  <meta name="description" content="Work by Ethan Stirnemann: the piano trio Regret, film and game scoring, sound design, fixed media, and electronic music in Ableton Live.">
   <link rel="canonical" href="https://easthan.github.io/work.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Ethan Stirnemann">
   <meta property="og:title" content="Work — Ethan Stirnemann">
-  <meta property="og:description" content="Concert music, scoring for film and games, and electronic performance.">
+  <meta property="og:description" content="Concert music, scoring for film and games, sound design, and electronic music.">
   <meta property="og:url" content="https://easthan.github.io/work.html">
   <meta property="og:image" content="https://easthan.github.io/assets/img/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#0D1016">
+  <meta name="theme-color" content="#15120F">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/main.js" defer></script>
 </head>
@@ -29,7 +29,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="Ethan Stirnemann — home">
-        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#131821"/><path d="M10 40h10l6-12 6 18 6-28 6 22h10" fill="none" stroke="#5FAFC6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1D1915"/><path d="M10 40h10l6-12 6 18 6-28 6 22h10" fill="none" stroke="#E2683C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Ethan Stirnemann
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -50,13 +50,13 @@
     <section class="page-hero">
       <div class="container">
         <p class="eyebrow">Work</p>
-        <h1>Selected work</h1>
-        <p class="lead">Concert music, scoring for film and games, and electronic performance. This portfolio is growing: recordings and video from this semester are being added through November.</p>
+        <h1>Music for the stage, the screen, and <em>the speakers</em>.</h1>
+        <p class="lead">Concert music, scoring for film and games, sound design, and electronic pieces. Some pieces are finished and some are still in progress, and new work is added as it’s recorded.</p>
         <div class="filters" role="group" aria-label="Filter work by category">
           <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
           <button class="filter" type="button" data-filter="concert" aria-pressed="false">Concert</button>
           <button class="filter" type="button" data-filter="screen" aria-pressed="false">Film &amp; Games</button>
-          <button class="filter" type="button" data-filter="electronic" aria-pressed="false">Electronic &amp; Live</button>
+          <button class="filter" type="button" data-filter="electronic" aria-pressed="false">Electronic</button>
         </div>
       </div>
     </section>
@@ -65,51 +65,127 @@
       <div class="container">
         <div class="cards">
 
-          <article class="card reveal" data-category="concert">
+          <article class="card card-wide reveal" data-category="concert" data-viz-scope>
             <div class="card-media">
               <canvas data-cover="3" aria-hidden="true"></canvas>
-              <span class="badge">Recording coming soon</span>
+              <span class="badge">Live recording</span>
             </div>
             <div class="card-body">
-              <p class="card-tag">Chamber music</p>
-              <h3>Piano Trio</h3>
-              <p>A chamber work for piano trio, performed on the New Sound concert series at the University of Tennessee School of Music.</p>
-              <ul class="card-meta">
-                <li>Piano trio</li>
-                <li>New Sound series, UTK</li>
-              </ul>
+              <p class="card-tag">Concert music · piano trio</p>
+              <h3>Regret</h3>
+              <p>A piano trio from 2024, performed on the New Sounds concert series at the University of Tennessee School of Music. Press play and the lines above draw the recording as it happens.</p>
+              <div class="player">
+                <button class="player-btn" type="button" aria-label="Play Regret">
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                </button>
+                <div class="player-info">
+                  <span class="player-title"><strong>Regret</strong> · New Sounds, UTK</span>
+                  <input class="player-range" type="range" min="0" max="1000" value="0" aria-label="Seek in Regret">
+                </div>
+                <span class="player-time">0:00 / 5:39</span>
+                <audio preload="metadata" src="assets/audio/regret-piano-trio.mp3"></audio>
+              </div>
+              <ul class="card-meta"><li>Piano trio</li><li>2024</li><li>5:39</li></ul>
             </div>
           </article>
 
           <article class="card reveal" data-category="screen">
             <div class="card-media">
-              <canvas data-cover="8" aria-hidden="true"></canvas>
-              <span class="badge">Video coming soon</span>
+              <video controls preload="none" playsinline poster="assets/img/posters/spacetime.webp" src="assets/video/spacetime-rescore.mp4" aria-label="SPACETIME re-score video"></video>
             </div>
             <div class="card-body">
               <p class="card-tag">Film scoring</p>
-              <h3>Scene re-score</h3>
-              <p>An original score written to picture for an existing film scene, replacing the music to rethink its pacing and emotional arc.</p>
-              <ul class="card-meta">
-                <li>Scoring to picture</li>
-                <li>Film Scoring, UTK</li>
-              </ul>
+              <h3>SPACETIME, re-scored</h3>
+              <p>A new score written to picture for scenes from Andrew Huang’s <em>SPACETIME</em>, made for my Film Scoring class.</p>
+              <p class="card-credit">Picture: <em>SPACETIME</em> by Andrew Huang. Music: Ethan Stirnemann.</p>
+              <ul class="card-meta"><li>Scoring to picture</li><li>2026</li><li>1:00</li></ul>
             </div>
           </article>
 
           <article class="card reveal" data-category="screen">
             <div class="card-media">
-              <canvas data-cover="5" aria-hidden="true"></canvas>
-              <span class="badge">Video coming soon</span>
+              <video controls preload="none" playsinline poster="assets/img/posters/quickdraw.webp" src="assets/video/quickdraw-game-audio.mp4" aria-label="Quickdraw game audio video"></video>
+            </div>
+            <div class="card-body">
+              <p class="card-tag">Game audio · sound design</p>
+              <h3>Quickdraw</h3>
+              <p>Re-scoring and sound effects for a quickdraw duel game. This one is mostly about sound design and timing.</p>
+              <ul class="card-meta"><li>Sound effects &amp; music</li><li>2026</li><li>0:22</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal" data-category="screen">
+            <div class="card-media">
+              <video controls preload="none" playsinline poster="assets/img/posters/platformer.webp" src="assets/video/platformer-game-audio.mp4" aria-label="2D platformer gameplay video"></video>
             </div>
             <div class="card-body">
               <p class="card-tag">Game audio</p>
-              <h3>Interactive scene in Unreal Engine</h3>
-              <p>Music and sound designed for a recreated game scene and implemented in Unreal Engine.</p>
-              <ul class="card-meta">
-                <li>Unreal Engine</li>
-                <li>Game &amp; Interactive Audio, UTK</li>
-              </ul>
+              <h3>2D Platformer</h3>
+              <p>All of the music and sound effects you hear in this 2D platformer template game, from the soundtrack to every jump and pickup.</p>
+              <ul class="card-meta"><li>Music &amp; sound effects</li><li>2026</li><li>2:15</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal" data-category="electronic">
+            <div class="card-media">
+              <video controls preload="none" playsinline poster="assets/img/posters/hypnagogic-engine.webp" src="assets/video/hypnagogic-engine.mp4" aria-label="Hypnagogic Engine video"></video>
+            </div>
+            <div class="card-body">
+              <p class="card-tag">Fixed media · audiovisual</p>
+              <h3>Hypnagogic Engine <small>working title</small></h3>
+              <p>A hypnotic fixed-media piece in progress. I took an AI-generated image of a futuristic cube world and edited it in DaVinci Resolve until it became an endless, slowly opening pattern: vaguely mechanical, never quite readable. The music pulls you in the same way.</p>
+              <ul class="card-meta"><li>Music &amp; video edit</li><li>2026</li><li>3:22</li><li>In progress</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal" data-category="electronic" data-viz-scope>
+            <div class="card-media">
+              <canvas data-cover="12" aria-hidden="true"></canvas>
+              <span class="badge">Ableton Live</span>
+            </div>
+            <div class="card-body">
+              <p class="card-tag">Electronic music</p>
+              <h3>Silhouettes Down the Fretboard</h3>
+              <p>An original track, written and produced in Ableton Live.</p>
+              <div class="player">
+                <button class="player-btn" type="button" aria-label="Play Silhouettes Down the Fretboard">
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                </button>
+                <div class="player-info">
+                  <span class="player-title"><strong>Listen</strong></span>
+                  <input class="player-range" type="range" min="0" max="1000" value="0" aria-label="Seek in Silhouettes Down the Fretboard">
+                </div>
+                <span class="player-time">0:00 / 4:23</span>
+                <audio preload="metadata" src="assets/audio/silhouettes-down-the-fretboard.mp3"></audio>
+              </div>
+              <ul class="card-meta"><li>Production</li><li>2026</li><li>4:23</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal" data-category="electronic" data-viz-scope>
+            <div class="card-media">
+              <canvas data-cover="7" aria-hidden="true"></canvas>
+              <span class="badge">Sketch</span>
+            </div>
+            <div class="card-body">
+              <p class="card-tag">Sound design</p>
+              <h3>Automation &amp; Waveform Study</h3>
+              <p>A short sketch exploring automation and basic waveforms with the Phase Plant synth in Ableton Live.</p>
+              <div class="player">
+                <button class="player-btn" type="button" aria-label="Play Automation and Waveform Study">
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                </button>
+                <div class="player-info">
+                  <span class="player-title"><strong>Listen</strong></span>
+                  <input class="player-range" type="range" min="0" max="1000" value="0" aria-label="Seek in Automation and Waveform Study">
+                </div>
+                <span class="player-time">0:00 / 2:03</span>
+                <audio preload="metadata" src="assets/audio/automation-waveform-study.mp3"></audio>
+              </div>
+              <ul class="card-meta"><li>Phase Plant</li><li>2026</li><li>2:03</li></ul>
             </div>
           </article>
 
@@ -117,7 +193,7 @@
             <div class="card-media">
               <img src="assets/img/keys-side-900.webp"
                    srcset="assets/img/keys-side-900.webp 900w, assets/img/keys-side-1600.webp 1600w"
-                   sizes="(min-width: 1100px) 380px, (min-width: 700px) 50vw, 100vw"
+                   sizes="(min-width: 1100px) 400px, (min-width: 700px) 50vw, 100vw"
                    width="900" height="600" loading="lazy"
                    alt="Ethan's hands on a MIDI keyboard during an Electroacoustic Ensemble session">
               <span class="badge">Ensemble member</span>
@@ -125,38 +201,8 @@
             <div class="card-body">
               <p class="card-tag">Live electronics</p>
               <h3>UTK Electroacoustic Ensemble</h3>
-              <p>Performing new electroacoustic music with the University of Tennessee’s Electroacoustic Ensemble, in concerts on campus and around Knoxville.</p>
-              <ul class="card-meta">
-                <li>Keys &amp; electronics</li>
-                <li>Next: Pilot Light, Nov 2</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-category="electronic">
-            <div class="card-media">
-              <canvas data-cover="12" aria-hidden="true"></canvas>
-              <span class="badge">Tracks coming soon</span>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Electronic music</p>
-              <h3>Productions in Ableton Live</h3>
-              <p>Original electronic tracks and sound design, written and produced in Ableton Live.</p>
-              <!-- When audio is ready, replace the badge above and add a player here:
-              <div class="player">
-                <button class="player-btn" type="button" aria-label="Play TRACK NAME">
-                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
-                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-                </button>
-                <input class="player-range" type="range" min="0" max="1000" value="0" aria-label="Seek">
-                <span class="player-time">0:00 / 0:00</span>
-                <audio preload="metadata" src="assets/audio/track.mp3"></audio>
-              </div>
-              -->
-              <ul class="card-meta">
-                <li>Ableton Live</li>
-                <li>Production &amp; sound design</li>
-              </ul>
+              <p>Performing new electroacoustic music with the University of Tennessee’s Electroacoustic Ensemble, on campus and around Knoxville.</p>
+              <ul class="card-meta"><li>Keys &amp; electronics</li><li>Next: Pilot Light, Nov 2</li></ul>
             </div>
           </article>
 
@@ -167,8 +213,10 @@
     <section class="section" id="performances">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Performances</p>
-          <h2>On stage</h2>
+          <div>
+            <p class="eyebrow">Performances</p>
+            <h2>On <em>stage</em></h2>
+          </div>
         </div>
         <ul class="events reveal">
           <li class="event" data-event-date="2026-11-02" data-past-label="Past">
@@ -180,10 +228,10 @@
             <span class="status" data-event-label>Upcoming</span>
           </li>
           <li class="event is-past">
-            <span class="event-when">Past semesters</span>
+            <time datetime="2024-11">Nov 2024</time>
             <div>
-              <div class="event-title">New Sound concert series: two works performed, including Piano Trio</div>
-              <div class="event-where">University of Tennessee School of Music · Knoxville, TN</div>
+              <div class="event-title"><em>Regret</em>, for piano trio</div>
+              <div class="event-where">New Sounds concert series · UTK School of Music</div>
             </div>
             <span class="status">Past</span>
           </li>
@@ -196,7 +244,7 @@
         <div class="cta-panel reveal">
           <div>
             <p class="eyebrow">Collaborate</p>
-            <h2>Need music for your film, game, or ensemble?</h2>
+            <h2>Need music for your film, game, or <em>ensemble</em>?</h2>
             <p>I’m looking for directors, developers, and performers to collaborate with this year.</p>
           </div>
           <div class="actions">

@@ -13,13 +13,13 @@
   <meta property="og:url" content="https://easthan.github.io/">
   <meta property="og:image" content="https://easthan.github.io/assets/img/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#0D1016">
+  <meta name="theme-color" content="#15120F">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/main.js" defer></script>
 </head>
@@ -29,7 +29,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="Ethan Stirnemann — home">
-        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#131821"/><path d="M10 40h10l6-12 6 18 6-28 6 22h10" fill="none" stroke="#5FAFC6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1D1915"/><path d="M10 40h10l6-12 6 18 6-28 6 22h10" fill="none" stroke="#E2683C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Ethan Stirnemann
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -47,26 +47,40 @@
   </header>
 
   <main id="main">
-    <section class="hero">
+    <section class="hero" data-viz-scope>
       <canvas class="ridges" data-ridges aria-hidden="true"></canvas>
       <div class="container hero-inner">
         <div class="hero-text">
-          <p class="eyebrow">Composer · Pianist · Producer · Sound Designer</p>
-          <h1 class="hero-title">Ethan<br>Stirnemann</h1>
+          <p class="eyebrow">Composer / Pianist / Producer</p>
+          <h1 class="hero-title">Ethan <em>Stirnemann</em></h1>
           <p class="lead">I write music for the concert hall, the studio, and the screen: chamber music, electronic production in Ableton Live, and scores for film and games.</p>
-          <div class="actions">
+
+          <div class="player player-feature">
+            <button class="player-btn" type="button" aria-label="Play Regret, for piano trio">
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            </button>
+            <div class="player-info">
+              <span class="player-title"><strong>Regret</strong> · piano trio · 2024</span>
+              <input class="player-range" type="range" min="0" max="1000" value="0" aria-label="Seek in Regret">
+            </div>
+            <span class="player-time">0:00 / 5:39</span>
+            <audio preload="metadata" src="assets/audio/regret-piano-trio.mp3"></audio>
+          </div>
+
+          <div class="actions" style="margin-top: 22px;">
             <a class="btn btn-primary" href="work.html">View my work</a>
             <a class="btn btn-ghost" href="contact.html">Get in touch</a>
           </div>
-          <p class="hero-meta">B.M. Composition student · University of Tennessee, Knoxville</p>
+          <p class="hero-meta">Press play: the lines behind this page draw the music as it happens.</p>
         </div>
         <figure class="hero-photo">
           <img src="assets/img/studio-portrait-1600.webp"
                srcset="assets/img/studio-portrait-900.webp 900w, assets/img/studio-portrait-1600.webp 1600w"
-               sizes="(min-width: 900px) 42vw, 100vw"
+               sizes="(min-width: 900px) 40vw, 100vw"
                width="1600" height="1066" fetchpriority="high"
                alt="Ethan Stirnemann smiling in headphones at a laptop and MIDI keyboard, with a grand piano behind him">
-          <figcaption class="photo-tag">In session with the UTK Electroacoustic Ensemble</figcaption>
+          <figcaption class="photo-tag">UTK Electroacoustic Ensemble session</figcaption>
         </figure>
       </div>
     </section>
@@ -85,15 +99,66 @@
     <section class="section">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">What I do</p>
-          <h2>Acoustic writing, electronic tools, music for picture and play.</h2>
+          <div>
+            <p class="eyebrow">Selected work</p>
+            <h2>Scores, games, and <em>sound</em>.</h2>
+          </div>
+          <a class="text-link" href="work.html">All work <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="cards">
+          <article class="card reveal">
+            <div class="card-media">
+              <video controls preload="none" playsinline poster="assets/img/posters/spacetime.webp" src="assets/video/spacetime-rescore.mp4" aria-label="SPACETIME re-score video"></video>
+            </div>
+            <div class="card-body">
+              <p class="card-tag">Film scoring</p>
+              <h3>SPACETIME, re-scored</h3>
+              <p>A new score for scenes from Andrew Huang’s <em>SPACETIME</em>, written to picture.</p>
+              <ul class="card-meta"><li>2026</li><li>1:00</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-media">
+              <video controls preload="none" playsinline poster="assets/img/posters/hypnagogic-engine.webp" src="assets/video/hypnagogic-engine.mp4" aria-label="Hypnagogic Engine video"></video>
+            </div>
+            <div class="card-body">
+              <p class="card-tag">Fixed media · audiovisual</p>
+              <h3>Hypnagogic Engine <small>working title</small></h3>
+              <p>A hypnotic, slowly opening world of machine-like patterns, with music to match.</p>
+              <ul class="card-meta"><li>2026</li><li>3:22</li><li>In progress</li></ul>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-media">
+              <video controls preload="none" playsinline poster="assets/img/posters/quickdraw.webp" src="assets/video/quickdraw-game-audio.mp4" aria-label="Quickdraw game audio video"></video>
+            </div>
+            <div class="card-body">
+              <p class="card-tag">Game audio</p>
+              <h3>Quickdraw</h3>
+              <p>Re-scoring and sound effects for a quickdraw duel game.</p>
+              <ul class="card-meta"><li>2026</li><li>0:22</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">What I do</p>
+            <h2>Acoustic writing, electronic tools, music for <em>picture</em> and <em>play</em>.</h2>
+          </div>
         </div>
         <ol class="areas reveal">
           <li>
             <a href="work.html?filter=concert">
               <span class="area-num">01</span>
               <span class="area-title">Composition</span>
-              <span class="area-desc">Chamber and concert music. Two works performed on UTK’s New Sound concert series, including a piano trio.</span>
+              <span class="area-desc">Chamber and concert music. My piano trio <em>Regret</em> was performed on UTK’s New Sounds concert series.</span>
               <span class="area-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -101,7 +166,7 @@
             <a href="work.html?filter=electronic">
               <span class="area-num">02</span>
               <span class="area-title">Electronic Music</span>
-              <span class="area-desc">Production, sound design, and live electronics in Ableton Live, on my own and with the UTK Electroacoustic Ensemble.</span>
+              <span class="area-desc">Production and sound design in Ableton Live, Phase Plant, and Max/MSP, plus fixed-media and audiovisual pieces.</span>
               <span class="area-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -109,7 +174,7 @@
             <a href="work.html?filter=screen">
               <span class="area-num">03</span>
               <span class="area-title">Film Scoring</span>
-              <span class="area-desc">Writing to picture: re-scoring film scenes to shape pacing, tension, and character.</span>
+              <span class="area-desc">Writing to picture, including a new score for scenes from Andrew Huang’s <em>SPACETIME</em>.</span>
               <span class="area-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -117,7 +182,7 @@
             <a href="work.html?filter=screen">
               <span class="area-num">04</span>
               <span class="area-title">Game Audio</span>
-              <span class="area-desc">Music and sound for interactive scenes, built and implemented in Unreal Engine.</span>
+              <span class="area-desc">Music and sound effects for games, from a 2D platformer to a quickdraw duel.</span>
               <span class="area-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -139,7 +204,7 @@
            sizes="100vw" width="1600" height="1066" loading="lazy"
            alt="Close-up of hands playing a red MIDI keyboard beside a laptop and audio interface">
       <div class="container">
-        <p class="band-quote reveal">Not strictly a traditional composer. I’m most at home where acoustic writing meets electronic sound.</p>
+        <p class="band-quote reveal">Not strictly a traditional composer. I’m most at home where <em>acoustic writing</em> meets electronic sound.</p>
       </div>
     </section>
 
@@ -153,7 +218,7 @@
         </figure>
         <div class="reveal">
           <p class="eyebrow">About</p>
-          <h2>Composer, pianist, and producer based in Knoxville.</h2>
+          <h2>Composer, pianist, and producer based in <em>Knoxville</em>.</h2>
           <p>I’m studying composition at the University of Tennessee, where my work moves between chamber music, electronic production, and scoring for film and games. I perform with the UTK Electroacoustic Ensemble and spend most of my studio time in Ableton Live.</p>
           <a class="text-link" href="about.html">Read my full bio <span aria-hidden="true">→</span></a>
         </div>
@@ -165,12 +230,12 @@
         <div class="cta-panel reveal">
           <div>
             <p class="eyebrow">Work with me</p>
-            <h2>Have a project that needs music?</h2>
+            <h2>Have a project that needs <em>music</em>?</h2>
             <p>Filmmakers, game developers, performers, and ensembles: I bring a composer’s ear and a producer’s toolkit, and I can take a project from first sketch to finished audio.</p>
           </div>
           <ul class="cta-list" aria-label="Services">
             <li>Film &amp; media scoring</li>
-            <li>Game music &amp; sound design</li>
+            <li>Game music &amp; sound effects</li>
             <li>Concert commissions</li>
             <li>Electronic production</li>
             <li>Piano performance</li>

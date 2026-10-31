@@ -1,0 +1,40 @@
+{%- assign w = include.work -%}
+{%- assign mt = w.media | default: "audio" -%}
+{%- assign home = include.home | default: false -%}
+<article class="card{% if w.wide and home == false %} card-wide{% endif %} reveal" data-category="{{ w.category }}"{% if mt == "audio" %} data-viz-scope{% endif %}>
+  <div class="card-media">
+    {%- if mt == "video" %}
+    <video controls preload="none" playsinline{% if w.poster and w.poster != "" %} poster="{{ w.poster }}"{% endif %} src="{{ w.file }}" aria-label="{{ w.title | strip_html | escape }} video"></video>
+    {%- elsif mt == "photo" %}
+    <img src="{{ w.file }}" width="900" height="600" loading="lazy" alt="{% if w.alt and w.alt != "" %}{{ w.alt | escape }}{% else %}{{ w.title | escape }}{% endif %}">
+    {%- else %}
+    <canvas data-cover="{{ include.seed }}" aria-hidden="true"></canvas>
+    {%- endif %}
+    {%- if mt != "video" and w.badge and w.badge != "" %}
+    <span class="badge">{{ w.badge }}</span>
+    {%- endif %}
+  </div>
+  <div class="card-body">
+    {%- if w.label and w.label != "" %}
+    <p class="card-tag">{{ w.label }}</p>
+    {%- endif %}
+    <h3>{% include md.html text=w.title %}{% if w.title_note and w.title_note != "" %} <small>{{ w.title_note }}</small>{% endif %}</h3>
+    {%- assign blurb = w.description -%}
+    {%- if home and w.home_description and w.home_description != "" -%}{%- assign blurb = w.home_description -%}{%- endif -%}
+    {%- if blurb and blurb != "" %}
+    <p>{% include md.html text=blurb %}</p>
+    {%- endif %}
+    {%- if home == false and w.credit and w.credit != "" %}
+    <p class="card-credit">{% include md.html text=w.credit %}</p>
+    {%- endif %}
+    {%- if mt == "audio" and w.file and w.file != "" %}
+    {% include player.html title=w.title label="<strong>Listen</strong>" file=w.file duration=w.duration %}
+    {%- endif %}
+    <ul class="card-meta">
+      {%- if home == false and w.detail and w.detail != "" %}<li>{{ w.detail }}</li>{% endif -%}
+      {%- if w.year and w.year != "" %}<li>{{ w.year }}</li>{% endif -%}
+      {%- if w.duration and w.duration != "" %}<li>{{ w.duration }}</li>{% endif -%}
+      {%- if w.status and w.status != "" %}<li>{{ w.status }}</li>{% endif -%}
+    </ul>
+  </div>
+</article>

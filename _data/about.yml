@@ -1,0 +1,63 @@
+seo_title: "About — Ethan Stirnemann"
+seo_description: "About Ethan Stirnemann, a composer and producer studying composition at the University of Tennessee, Knoxville."
+share_description: "Composer and producer based in Knoxville, Tennessee."
+
+label: About
+headline: ""
+bio: |
+  Ethan Stirnemann is a composer and producer based in Knoxville, Tennessee, where he is pursuing a Bachelor of Music in Composition at the University of Tennessee.
+
+  His work moves between acoustic and electronic worlds. Alongside writing chamber music, he produces and designs sound in Ableton Live and Max/MSP, makes fixed-media and audiovisual pieces, and is building his craft in scoring for film and interactive media.
+
+  Ethan performs with the UTK Electroacoustic Ensemble. In his film scoring and game audio coursework he has re-scored scenes from Andrew Huang’s *SPACETIME* and created the music and sound effects for games, work that brings together his interests in composition, sound design, and technology.
+button_contact: Get in touch
+button_work: See my work
+photo: /assets/img/studio-portrait-1600.webp
+photo_alt: "Ethan Stirnemann in headphones at a laptop and MIDI keyboard, smiling, with a grand piano behind him"
+
+facts:
+  - label: Based in
+    value: "Knoxville, Tennessee"
+  - label: Studying
+    value: "B.M. Composition, University of Tennessee, Knoxville"
+  - label: Focus
+    value: "Composition, electronic music, film & game scoring"
+  - label: Ensemble
+    value: UTK Electroacoustic Ensemble
+  - label: Tools
+    value: "Ableton Live, Phase Plant, Max/MSP, DaVinci Resolve, Unreal Engine"
+  - label: Japanese
+    value: "Minor · studied abroad in Japan, 2025"
+
+short_bio_title: "Short bio: for programs & press"
+short_bio: "Ethan Stirnemann is a Knoxville-based composer and producer studying composition at the University of Tennessee. His music spans chamber works, electronic production in Ableton Live, and scoring for film and games. He performs with the UTK Electroacoustic Ensemble."
+
+approach_label: Approach
+approach_headline: ""
+approach_text: "A lot of my writing happens in Ableton Live, where acoustic instruments, synthesis, and recorded sound can share the same piece. Whether I’m writing for a piano trio, a film scene, or a game, I’m interested in how music shapes what people feel and notice, and in using technology to get there."
+
+skills_label: "Skills & tools"
+skills_headline: What I work with
+skills:
+  - Composition
+  - Ableton Live
+  - Phase Plant
+  - Max/MSP
+  - Sound design
+  - Scoring to picture
+  - Game audio
+  - DaVinci Resolve
+  - Unreal Engine
+  - Live electronics
+
+gallery:
+  - image: /assets/img/keys-side-900.webp
+    alt: "Side view of hands playing a MIDI keyboard next to a laptop and audio interface"
+  - image: /assets/img/keys-close-900.webp
+    alt: "Close-up of hands on the keys of a compact MIDI keyboard"
+gallery_caption: "Photos: Austin Orr"
+
+cta_label: Let’s talk
+cta_headline: Working on something?
+cta_text: "Scoring, sound design, or a new piece for your project. I’d like to hear about it."
+cta_button: Contact me

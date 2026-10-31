@@ -1,51 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Page not found — Ethan Stirnemann</title>
-  <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#15120F">
-  <base href="/">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
-  <script src="assets/js/main.js?v=3" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Ethan Stirnemann — home">
-        Ethan Stirnemann
-      </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span class="sr-only">Menu</span><span class="nav-toggle-bars" aria-hidden="true"></span>
-      </button>
-      <nav id="site-nav" class="site-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="work.html">Works</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html" class="nav-cta">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main id="main" class="message-page">
+---
+layout: default
+title: "Page not found — Ethan Stirnemann"
+permalink: /404.html
+noindex: true
+no_footer: true
+main_class: message-page
+---
     <canvas class="ridges" data-ridges aria-hidden="true"></canvas>
     <div class="container">
       <p class="eyebrow">404</p>
       <h1>This page went silent.</h1>
       <p class="lead">The page you’re looking for doesn’t exist or has moved.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="index.html">Back to home</a>
-        <a class="btn btn-ghost" href="contact.html">Contact</a>
+        <a class="btn btn-primary" href="/">Back to home</a>
+        <a class="btn btn-ghost" href="/contact.html">Contact</a>
       </div>
     </div>
-  </main>
-</body>
-</html>

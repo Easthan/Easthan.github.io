@@ -1,59 +1,33 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Work — Ethan Stirnemann</title>
-  <meta name="description" content="Work by Ethan Stirnemann: the piano trio Regret, film and game scoring, sound design, fixed media, and electronic music in Ableton Live.">
-  <link rel="canonical" href="https://easthan.github.io/work.html">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Ethan Stirnemann">
-  <meta property="og:title" content="Work — Ethan Stirnemann">
-  <meta property="og:description" content="Concert music, scoring for film and games, sound design, and electronic music.">
-  <meta property="og:url" content="https://easthan.github.io/work.html">
-  <meta property="og:image" content="https://easthan.github.io/assets/img/og-image.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#15120F">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
-  <script src="assets/js/main.js?v=3" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Ethan Stirnemann — home">
-        Ethan Stirnemann
-      </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span class="sr-only">Menu</span><span class="nav-toggle-bars" aria-hidden="true"></span>
-      </button>
-      <nav id="site-nav" class="site-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="work.html" aria-current="page">Works</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html" class="nav-cta">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
+---
+layout: default
+copy: works_page
+---
+{%- assign t = site.data.works_page -%}
+{%- assign now_s = site.time | date: "%s" | plus: 0 -%}
+{%- assign cats = site.data.works | map: "category" | uniq -%}
     <section class="page-hero">
       <div class="container">
-        <h1>Works</h1>
-        <div class="filters" role="group" aria-label="Filter work by category">
-          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter" type="button" data-filter="concert" aria-pressed="false">Concert</button>
-          <button class="filter" type="button" data-filter="screen" aria-pressed="false">Film &amp; Games</button>
-          <button class="filter" type="button" data-filter="electronic" aria-pressed="false">Electronic</button>
+        {%- if t.label and t.label != "" %}
+        <p class="eyebrow">{{ t.label }}</p>
+        {%- endif %}
+        <h1>{% include md.html text=t.headline %}</h1>
+        {%- if t.intro and t.intro != "" %}
+        <p class="lead">{% include md.html text=t.intro %}</p>
+        {%- endif %}
+        <div class="filters" role="group" aria-label="Filter works by category">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">{{ t.filter_all }}</button>
+          {%- if cats contains "concert" %}
+          <button class="filter" type="button" data-filter="concert" aria-pressed="false">{{ t.filter_concert }}</button>
+          {%- endif %}
+          {%- if cats contains "screen" %}
+          <button class="filter" type="button" data-filter="screen" aria-pressed="false">{{ t.filter_screen }}</button>
+          {%- endif %}
+          {%- if cats contains "electronic" %}
+          <button class="filter" type="button" data-filter="electronic" aria-pressed="false">{{ t.filter_electronic }}</button>
+          {%- endif %}
+          {%- if cats contains "improvisation" %}
+          <button class="filter" type="button" data-filter="improvisation" aria-pressed="false">{{ t.filter_improvisation }}</button>
+          {%- endif %}
         </div>
       </div>
     </section>
@@ -61,148 +35,10 @@
     <section class="section-tight" aria-label="Projects">
       <div class="container">
         <div class="cards">
-
-          <article class="card card-wide reveal" data-category="concert" data-viz-scope>
-            <div class="card-media">
-              <canvas data-cover="3" aria-hidden="true"></canvas>
-              <span class="badge">Live recording</span>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Concert music · piano trio</p>
-              <h3>Regret</h3>
-              <p>A piano trio from 2024, performed on the New Sounds concert series at the University of Tennessee School of Music.</p>
-              <div class="player">
-                <button class="player-btn" type="button" aria-label="Play Regret">
-                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
-                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-                </button>
-                <div class="player-info">
-                  <span class="player-title"><strong>Regret</strong> · New Sounds, UTK</span>
-                  <input class="player-range" type="range" min="0" max="1000" value="0" aria-label="Seek in Regret">
-                </div>
-                <span class="player-time">0:00 / 5:39</span>
-                <audio preload="metadata" src="assets/audio/regret-piano-trio.mp3"></audio>
-              </div>
-              <ul class="card-meta"><li>Piano trio</li><li>2024</li><li>5:39</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-category="screen">
-            <div class="card-media">
-              <video controls preload="none" playsinline poster="assets/img/posters/spacetime.webp" src="assets/video/spacetime-rescore.mp4" aria-label="SPACETIME re-score video"></video>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Film scoring</p>
-              <h3>SPACETIME, re-scored</h3>
-              <p>A new score written to picture for scenes from Andrew Huang’s <em>SPACETIME</em>, made for my Film Scoring class.</p>
-              <p class="card-credit">Picture: <em>SPACETIME</em> by Andrew Huang. Music: Ethan Stirnemann.</p>
-              <ul class="card-meta"><li>Scoring to picture</li><li>2026</li><li>1:00</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-category="screen">
-            <div class="card-media">
-              <video controls preload="none" playsinline poster="assets/img/posters/quickdraw.webp" src="assets/video/quickdraw-game-audio.mp4" aria-label="Quickdraw game audio video"></video>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Game audio · sound design</p>
-              <h3>Quickdraw</h3>
-              <p>Re-scoring and sound effects for a quickdraw duel game. This one is mostly about sound design and timing.</p>
-              <ul class="card-meta"><li>Sound effects &amp; music</li><li>2026</li><li>0:22</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-category="screen">
-            <div class="card-media">
-              <video controls preload="none" playsinline poster="assets/img/posters/platformer.webp" src="assets/video/platformer-game-audio.mp4" aria-label="2D platformer gameplay video"></video>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Game audio</p>
-              <h3>2D Platformer</h3>
-              <p>All of the music and sound effects you hear in this 2D platformer template game, from the soundtrack to every jump and pickup.</p>
-              <ul class="card-meta"><li>Music &amp; sound effects</li><li>2026</li><li>2:15</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-category="electronic">
-            <div class="card-media">
-              <video controls preload="none" playsinline poster="assets/img/posters/hypnagogic-engine.webp" src="assets/video/hypnagogic-engine.mp4" aria-label="Hypnagogic Engine video"></video>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Fixed media · audiovisual</p>
-              <h3>Hypnagogic Engine <small>working title</small></h3>
-              <p>A hypnotic fixed-media piece in progress. I took an AI-generated image of a futuristic cube world and edited it in DaVinci Resolve until it became an endless, slowly opening pattern: vaguely mechanical, never quite readable. The music pulls you in the same way.</p>
-              <ul class="card-meta"><li>Music &amp; video edit</li><li>2026</li><li>3:22</li><li>In progress</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-category="electronic" data-viz-scope>
-            <div class="card-media">
-              <canvas data-cover="12" aria-hidden="true"></canvas>
-              <span class="badge">Ableton Live</span>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Electronic music</p>
-              <h3>Silhouettes Down the Fretboard</h3>
-              <p>An original track, written and produced in Ableton Live.</p>
-              <div class="player">
-                <button class="player-btn" type="button" aria-label="Play Silhouettes Down the Fretboard">
-                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
-                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-                </button>
-                <div class="player-info">
-                  <span class="player-title"><strong>Listen</strong></span>
-                  <input class="player-range" type="range" min="0" max="1000" value="0" aria-label="Seek in Silhouettes Down the Fretboard">
-                </div>
-                <span class="player-time">0:00 / 4:23</span>
-                <audio preload="metadata" src="assets/audio/silhouettes-down-the-fretboard.mp3"></audio>
-              </div>
-              <ul class="card-meta"><li>Production</li><li>2026</li><li>4:23</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-category="electronic" data-viz-scope>
-            <div class="card-media">
-              <canvas data-cover="7" aria-hidden="true"></canvas>
-              <span class="badge">Sketch</span>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Sound design</p>
-              <h3>Automation &amp; Waveform Study</h3>
-              <p>A short sketch exploring automation and basic waveforms with the Phase Plant synth in Ableton Live.</p>
-              <div class="player">
-                <button class="player-btn" type="button" aria-label="Play Automation and Waveform Study">
-                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
-                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-                </button>
-                <div class="player-info">
-                  <span class="player-title"><strong>Listen</strong></span>
-                  <input class="player-range" type="range" min="0" max="1000" value="0" aria-label="Seek in Automation and Waveform Study">
-                </div>
-                <span class="player-time">0:00 / 2:03</span>
-                <audio preload="metadata" src="assets/audio/automation-waveform-study.mp3"></audio>
-              </div>
-              <ul class="card-meta"><li>Phase Plant</li><li>2026</li><li>2:03</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-category="electronic">
-            <div class="card-media">
-              <img src="assets/img/keys-side-900.webp"
-                   srcset="assets/img/keys-side-900.webp 900w, assets/img/keys-side-1600.webp 1600w"
-                   sizes="(min-width: 1100px) 400px, (min-width: 700px) 50vw, 100vw"
-                   width="900" height="600" loading="lazy"
-                   alt="Ethan's hands on a MIDI keyboard during an Electroacoustic Ensemble session">
-              <span class="badge">Ensemble member</span>
-            </div>
-            <div class="card-body">
-              <p class="card-tag">Live electronics</p>
-              <h3>UTK Electroacoustic Ensemble</h3>
-              <p>Performing new electroacoustic music with the University of Tennessee’s Electroacoustic Ensemble, on campus and around Knoxville.</p>
-              <ul class="card-meta"><li>Keys &amp; electronics</li><li>Next: Pilot Light, Nov 2</li></ul>
-            </div>
-          </article>
-
+          {%- for w in site.data.works %}
+          {%- assign seed = forloop.index | times: 4 | plus: 3 %}
+          {% include work-card.html work=w seed=seed %}
+          {%- endfor %}
         </div>
       </div>
     </section>
@@ -211,34 +47,34 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">Performances</p>
-            <h2>On <em>stage</em></h2>
+            <p class="eyebrow">{{ t.performances_label }}</p>
+            <h2>{% include md.html text=t.performances_headline %}</h2>
           </div>
         </div>
         <ul class="events reveal">
-          <li class="event" data-event-date="2026-11-02" data-past-label="Past">
-            <time datetime="2026-11-02">Nov 2, 2026</time>
+          {%- for p in site.data.performances %}
+          {%- assign has_date = false -%}
+          {%- assign ev_s = 0 -%}
+          {%- if p.date and p.date != "" -%}{%- assign has_date = true -%}{%- assign ev_s = p.date | date: "%s" | plus: 86399 -%}{%- endif %}
+          <li class="event{% if has_date == false or ev_s < now_s %} is-past{% endif %}"{% if has_date %} data-event-date="{{ p.date | date: '%Y-%m-%d' }}" data-past-label="Past"{% endif %}>
+            {%- if p.when and p.when != "" %}
+            <span class="event-when">{{ p.when }}</span>
+            {%- elsif has_date %}
+            <time datetime="{{ p.date | date: '%Y-%m-%d' }}">{{ p.date | date: "%b %-d, %Y" }}</time>
+            {%- else %}
+            <span class="event-when"></span>
+            {%- endif %}
             <div>
-              <div class="event-title">UTK Electroacoustic Ensemble</div>
-              <div class="event-where">Pilot Light · Knoxville, TN</div>
+              <div class="event-title">{% include md.html text=p.title %}</div>
+              {%- if p.place and p.place != "" %}
+              <div class="event-where">{{ p.place }}</div>
+              {%- endif %}
             </div>
-            <span class="status" data-event-label>Upcoming</span>
+            {%- if has_date %}
+            <span class="status" data-event-label>{% if ev_s < now_s %}Past{% else %}Upcoming{% endif %}</span>
+            {%- endif %}
           </li>
-          <li class="event is-past">
-            <time datetime="2024-11">Nov 2024</time>
-            <div>
-              <div class="event-title"><em>Regret</em>, for piano trio</div>
-              <div class="event-where">New Sounds concert series · UTK School of Music</div>
-            </div>
-            <span class="status">Past</span>
-          </li>
-          <li class="event is-past">
-            <span class="event-when">More</span>
-            <div>
-              <div class="event-title">And more</div>
-              <div class="event-where">Other performances not added yet</div>
-            </div>
-          </li>
+          {%- endfor %}
         </ul>
       </div>
     </section>
@@ -247,33 +83,12 @@
       <div class="container">
         <div class="cta-panel reveal">
           <div>
-            <p class="eyebrow">Collaborate</p>
-            <h2>Need music for your film, game, or <em>ensemble</em>?</h2>
+            <p class="eyebrow">{{ t.cta_label }}</p>
+            <h2>{% include md.html text=t.cta_headline %}</h2>
           </div>
           <div class="actions">
-            <a class="btn btn-primary" href="contact.html">Get in touch</a>
+            <a class="btn btn-primary" href="/contact.html">{{ t.cta_button }}</a>
           </div>
         </div>
       </div>
     </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <a class="brand" href="index.html">Ethan Stirnemann</a>
-        <p class="footer-tag">Composer · Producer · Knoxville, Tennessee</p>
-      </div>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="work.html">Works</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="mailto:ethanstirnemann.music@gmail.com">Email</a>
-      </nav>
-    </div>
-    <div class="container footer-bottom">
-      <p>© <span data-year>2026</span> Ethan Stirnemann</p>
-    </div>
-  </footer>
-</body>
-</html>

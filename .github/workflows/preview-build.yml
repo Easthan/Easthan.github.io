@@ -1,0 +1,23 @@
+# Builds a test copy of the site on any branch except main, using the same
+# Jekyll build GitHub Pages uses. Download it from the run's "site" artifact.
+name: Preview build
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 3

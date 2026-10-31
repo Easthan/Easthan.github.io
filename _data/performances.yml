@@ -1,0 +1,21 @@
+# date (YYYY-MM-DD) shows Upcoming/Past automatically. "when" replaces the shown date.
+- date: 2026-11-02
+  when: ""
+  title: UTK Electroacoustic Ensemble
+  place: "Pilot Light · Knoxville, TN"
+  show_on_home: true
+  home_text: "UTK Electroacoustic Ensemble, live at Pilot Light · Knoxville"
+
+- date: 2024-11-12
+  when: Nov 2024
+  title: "*Regret*, for piano trio"
+  place: "New Sounds concert series · UTK School of Music"
+  show_on_home: false
+  home_text: ""
+
+- date: ""
+  when: More
+  title: And more
+  place: Other performances not added yet
+  show_on_home: false
+  home_text: ""

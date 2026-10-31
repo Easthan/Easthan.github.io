@@ -800,8 +800,8 @@ button { font: inherit; color: inherit; }
   gap: clamp(32px, 6vw, 88px);
   align-items: start;
 }
-.about-hero .bio p { color: var(--muted); max-width: 60ch; }
-.about-hero .bio p:first-of-type { color: var(--text); font-size: 1.15rem; }
+.about-hero .bio-text p { color: var(--muted); max-width: 60ch; }
+.about-hero .bio-text p:first-child { color: var(--text); font-size: 1.15rem; }
 .about-hero .bio .actions { margin-top: 28px; }
 .about-photo {
   border-radius: var(--radius);

@@ -1,127 +1,71 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact — Ethan Stirnemann</title>
-  <meta name="description" content="Contact Ethan Stirnemann about film and game scoring, concert commissions, electronic production, or sound design.">
-  <link rel="canonical" href="https://easthan.github.io/contact.html">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Ethan Stirnemann">
-  <meta property="og:title" content="Contact — Ethan Stirnemann">
-  <meta property="og:description" content="Let’s work together: scoring, sound design, and new music.">
-  <meta property="og:url" content="https://easthan.github.io/contact.html">
-  <meta property="og:image" content="https://easthan.github.io/assets/img/og-image.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#15120F">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
-  <script src="assets/js/main.js?v=3" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Ethan Stirnemann — home">
-        Ethan Stirnemann
-      </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span class="sr-only">Menu</span><span class="nav-toggle-bars" aria-hidden="true"></span>
-      </button>
-      <nav id="site-nav" class="site-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="work.html">Works</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html" class="nav-cta" aria-current="page">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
+---
+layout: default
+copy: contact
+---
+{%- assign t = site.data.contact -%}
+{%- assign s = site.data.site -%}
+{%- assign f = t.form -%}
     <section class="page-hero">
       <div class="container contact-grid">
         <div>
-          <p class="eyebrow">Contact</p>
-          <h1>Let’s work <em>together</em>.</h1>
+          <p class="eyebrow">{{ t.label }}</p>
+          <h1>{% include md.html text=t.headline %}</h1>
           <dl class="contact-info">
             <div>
-              <dt>Email</dt>
-              <dd><a href="mailto:ethanstirnemann.music@gmail.com">ethanstirnemann.music@gmail.com</a></dd>
+              <dt>{{ t.email_label }}</dt>
+              <dd><a href="mailto:{{ s.email }}">{{ s.email }}</a></dd>
             </div>
+            {%- if t.based_value and t.based_value != "" %}
             <div>
-              <dt>Based in</dt>
-              <dd>Knoxville, Tennessee</dd>
+              <dt>{{ t.based_label }}</dt>
+              <dd>{{ t.based_value }}</dd>
             </div>
+            {%- endif %}
+            {%- if t.fits_value and t.fits_value != "" %}
             <div>
-              <dt>Good fits</dt>
-              <dd>Film &amp; media scoring · Game audio · Concert commissions · Electronic production</dd>
+              <dt>{{ t.fits_label }}</dt>
+              <dd>{{ t.fits_value }}</dd>
             </div>
+            {%- endif %}
           </dl>
         </div>
 
-        <!-- Form delivery: FormSubmit (formsubmit.co) sends each message to the email in the action URL.
+        <!-- Form delivery: FormSubmit (formsubmit.co) sends each message to the site email.
              The first message triggers a one-time activation email to that address. -->
-        <form class="form" action="https://formsubmit.co/ethanstirnemann.music@gmail.com" method="POST">
+        <form class="form" action="https://formsubmit.co/{{ s.email }}" method="POST">
           <input type="hidden" name="_subject" value="New message from your website">
-          <input type="hidden" name="_next" value="https://easthan.github.io/thanks.html">
+          <input type="hidden" name="_next" value="{{ site.url }}/thanks.html">
           <input type="hidden" name="_template" value="table">
           <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
           <div class="form-row">
             <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required placeholder="Your name">
+              <label for="name">{{ f.name_label }}</label>
+              <input id="name" name="name" type="text" autocomplete="name" required placeholder="{{ f.name_placeholder | escape }}">
             </div>
             <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+              <label for="email">{{ f.email_label }}</label>
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="{{ f.email_placeholder | escape }}">
             </div>
           </div>
+          {%- if f.topics.size > 0 %}
           <div class="field">
-            <label for="topic">What’s this about?</label>
+            <label for="topic">{{ f.topic_label }}</label>
             <select id="topic" name="topic">
-              <option>Film or media scoring</option>
-              <option>Game audio or sound design</option>
-              <option>A new piece / commission</option>
-              <option>Electronic production</option>
-              <option>Something else</option>
+              {%- for topic in f.topics %}
+              <option>{{ topic }}</option>
+              {%- endfor %}
             </select>
           </div>
+          {%- endif %}
           <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required placeholder="Tell me a little about your project, timeline, and how I can help."></textarea>
+            <label for="message">{{ f.message_label }}</label>
+            <textarea id="message" name="message" required placeholder="{{ f.message_placeholder | escape }}"></textarea>
           </div>
-          <button class="btn btn-primary" type="submit">Send message</button>
-          <p class="form-note">Your message goes straight to my inbox. I’ll reply as soon as I can.</p>
+          <button class="btn btn-primary" type="submit">{{ f.button }}</button>
+          {%- if f.note and f.note != "" %}
+          <p class="form-note">{{ f.note }}</p>
+          {%- endif %}
         </form>
       </div>
     </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <a class="brand" href="index.html">Ethan Stirnemann</a>
-        <p class="footer-tag">Composer · Producer · Knoxville, Tennessee</p>
-      </div>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="work.html">Works</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="mailto:ethanstirnemann.music@gmail.com">Email</a>
-      </nav>
-    </div>
-    <div class="container footer-bottom">
-      <p>© <span data-year>2026</span> Ethan Stirnemann</p>
-    </div>
-  </footer>
-</body>
-</html>

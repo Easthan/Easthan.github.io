@@ -1,0 +1,529 @@
+# Pages CMS editor setup (https://app.pagescms.org).
+# Each entry below is one form in the editor. Saving a form updates the
+# matching file in _data/ and the live site rebuilds in about a minute.
+# Tip shown in the editor: wrap words in *asterisks* for italics.
+
+media:
+  input: assets
+  output: /assets
+
+content:
+  - name: home
+    label: Home page
+    type: file
+    path: _data/home.yml
+    format: yaml
+    fields:
+      - name: roles
+        label: Small line above your name
+        type: string
+      - name: first_name
+        label: First name
+        type: string
+      - name: last_name
+        label: Last name (shown in italics)
+        type: string
+      - name: intro
+        label: Main line under your name
+        type: text
+      - name: featured_track
+        label: Featured track (player at the top)
+        type: object
+        fields:
+          - name: title
+            label: Track title
+            type: string
+          - name: details
+            label: Details after the title
+            type: string
+          - name: file
+            label: Audio file (mp3)
+            type: file
+          - name: duration
+            label: "Length, like 5:39"
+            type: string
+      - name: button_work
+        label: First button
+        type: string
+      - name: button_contact
+        label: Second button
+        type: string
+      - name: hero_photo
+        label: Main photo
+        type: image
+      - name: hero_photo_alt
+        label: Main photo description (for screen readers)
+        type: string
+      - name: hero_photo_credit
+        label: Main photo credit
+        type: string
+      - name: selected_label
+        label: Selected work - small label
+        type: string
+      - name: selected_headline
+        label: Selected work - headline
+        type: string
+        description: "Cards shown here are the works marked 'Show on home page'."
+      - name: selected_link
+        label: Selected work - link text
+        type: string
+      - name: areas_label
+        label: What I do - small label
+        type: string
+      - name: areas_headline
+        label: What I do - headline
+        type: string
+      - name: areas
+        label: What I do - list
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: text
+            label: Description
+            type: text
+          - name: filter
+            label: Links to Works filtered by
+            type: select
+            options:
+              values:
+                - name: all
+                  label: All works
+                - name: concert
+                  label: Concert
+                - name: screen
+                  label: "Film & Games"
+                - name: electronic
+                  label: Electronic
+                - name: improvisation
+                  label: Improvisation
+      - name: band_photo
+        label: Wide photo
+        type: image
+      - name: band_photo_alt
+        label: Wide photo description
+        type: string
+      - name: band_quote
+        label: Quote over the wide photo
+        type: text
+      - name: about_photo
+        label: About preview - photo
+        type: image
+      - name: about_photo_alt
+        label: About preview - photo description
+        type: string
+      - name: about_label
+        label: About preview - small label
+        type: string
+      - name: about_headline
+        label: About preview - headline
+        type: string
+      - name: about_text
+        label: About preview - text
+        type: text
+      - name: about_link
+        label: About preview - link text
+        type: string
+      - name: cta_label
+        label: Bottom box - small label
+        type: string
+      - name: cta_headline
+        label: Bottom box - headline
+        type: string
+      - name: cta_text
+        label: Bottom box - text (optional)
+        type: text
+      - name: cta_list
+        label: Bottom box - services
+        type: string
+        list: true
+      - name: cta_button
+        label: Bottom box - first button
+        type: string
+      - name: cta_button_2
+        label: Bottom box - second button (optional)
+        type: string
+      - name: seo_title
+        label: Browser tab title
+        type: string
+      - name: seo_description
+        label: Search engine description
+        type: text
+      - name: share_description
+        label: Link preview text
+        type: string
+
+  - name: works
+    label: Works (cards)
+    type: file
+    path: _data/works.yml
+    format: yaml
+    list: true
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: title_note
+        label: Small note after the title (like 'working title')
+        type: string
+      - name: category
+        label: Category (sets the Works filter)
+        type: select
+        options:
+          values:
+            - name: concert
+              label: Concert
+            - name: screen
+              label: "Film & Games"
+            - name: electronic
+              label: Electronic
+            - name: improvisation
+              label: Improvisation
+      - name: label
+        label: Small label above the title
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: home_description
+        label: Shorter description for the home page (optional)
+        type: text
+      - name: credit
+        label: Credit line (optional)
+        type: string
+      - name: media
+        label: Media type
+        type: select
+        options:
+          values:
+            - name: audio
+              label: Audio (mp3)
+            - name: video
+              label: Video (mp4)
+            - name: photo
+              label: Photo only
+      - name: file
+        label: Audio, video, or photo file
+        type: file
+      - name: poster
+        label: Video cover image (videos only)
+        type: image
+      - name: alt
+        label: Photo description (photos only)
+        type: string
+      - name: badge
+        label: Corner tag (audio and photo cards)
+        type: string
+      - name: detail
+        label: Detail (like 'Scoring to picture')
+        type: string
+      - name: year
+        label: Year
+        type: string
+      - name: duration
+        label: "Length, like 3:22"
+        type: string
+      - name: status
+        label: Status (like 'In progress', optional)
+        type: string
+      - name: wide
+        label: Show as a wide card
+        type: boolean
+      - name: on_home
+        label: Show on home page
+        type: boolean
+
+  - name: works_page
+    label: Works page text
+    type: file
+    path: _data/works_page.yml
+    format: yaml
+    fields:
+      - name: label
+        label: Small label above the headline (optional)
+        type: string
+      - name: headline
+        label: Headline
+        type: string
+      - name: intro
+        label: Intro text (optional)
+        type: text
+      - name: filter_all
+        label: Filter button - all
+        type: string
+      - name: filter_concert
+        label: Filter button - concert
+        type: string
+      - name: filter_screen
+        label: Filter button - film and games
+        type: string
+      - name: filter_electronic
+        label: Filter button - electronic
+        type: string
+      - name: filter_improvisation
+        label: Filter button - improvisation
+        type: string
+      - name: performances_label
+        label: Performances - small label
+        type: string
+      - name: performances_headline
+        label: Performances - headline
+        type: string
+      - name: cta_label
+        label: Bottom box - small label
+        type: string
+      - name: cta_headline
+        label: Bottom box - headline
+        type: string
+      - name: cta_button
+        label: Bottom box - button
+        type: string
+      - name: seo_title
+        label: Browser tab title
+        type: string
+      - name: seo_description
+        label: Search engine description
+        type: text
+      - name: share_description
+        label: Link preview text
+        type: string
+
+  - name: performances
+    label: Performances
+    type: file
+    path: _data/performances.yml
+    format: yaml
+    list: true
+    fields:
+      - name: date
+        label: Date (shows Upcoming / Past automatically)
+        type: date
+      - name: when
+        label: Text to show instead of the date (optional)
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: place
+        label: Place
+        type: string
+      - name: show_on_home
+        label: Show in the bar on the home page
+        type: boolean
+      - name: home_text
+        label: Text for the home page bar
+        type: string
+
+  - name: about
+    label: About page
+    type: file
+    path: _data/about.yml
+    format: yaml
+    fields:
+      - name: label
+        label: Small label at the top
+        type: string
+      - name: headline
+        label: Headline (optional)
+        type: string
+      - name: bio
+        label: Bio
+        type: text
+        description: "Leave a blank line between paragraphs."
+      - name: button_contact
+        label: First button
+        type: string
+      - name: button_work
+        label: Second button
+        type: string
+      - name: photo
+        label: Photo
+        type: image
+      - name: photo_alt
+        label: Photo description
+        type: string
+      - name: facts
+        label: Quick facts
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Label
+            type: string
+          - name: value
+            label: Value
+            type: string
+      - name: short_bio_title
+        label: Short bio - box title
+        type: string
+      - name: short_bio
+        label: Short bio
+        type: text
+      - name: approach_label
+        label: Approach - small label
+        type: string
+      - name: approach_headline
+        label: Approach - headline (optional)
+        type: string
+      - name: approach_text
+        label: Approach - text
+        type: text
+      - name: skills_label
+        label: Skills - small label
+        type: string
+      - name: skills_headline
+        label: Skills - headline (optional)
+        type: string
+      - name: skills
+        label: Skills and tools
+        type: string
+        list: true
+      - name: gallery
+        label: Photos
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Photo
+            type: image
+          - name: alt
+            label: Photo description
+            type: string
+      - name: gallery_caption
+        label: Photo credit / caption
+        type: string
+      - name: cta_label
+        label: Bottom box - small label
+        type: string
+      - name: cta_headline
+        label: Bottom box - headline
+        type: string
+      - name: cta_text
+        label: Bottom box - text
+        type: text
+      - name: cta_button
+        label: Bottom box - button
+        type: string
+      - name: seo_title
+        label: Browser tab title
+        type: string
+      - name: seo_description
+        label: Search engine description
+        type: text
+      - name: share_description
+        label: Link preview text
+        type: string
+
+  - name: contact
+    label: Contact page
+    type: file
+    path: _data/contact.yml
+    format: yaml
+    fields:
+      - name: label
+        label: Small label at the top
+        type: string
+      - name: headline
+        label: Headline
+        type: string
+      - name: email_label
+        label: Email - label
+        type: string
+      - name: based_label
+        label: Location - label
+        type: string
+      - name: based_value
+        label: Location
+        type: string
+      - name: fits_label
+        label: Good fits - label
+        type: string
+      - name: fits_value
+        label: Good fits
+        type: string
+      - name: form
+        label: Contact form
+        type: object
+        fields:
+          - name: name_label
+            label: Name - label
+            type: string
+          - name: name_placeholder
+            label: Name - hint text
+            type: string
+          - name: email_label
+            label: Email - label
+            type: string
+          - name: email_placeholder
+            label: Email - hint text
+            type: string
+          - name: topic_label
+            label: Topic - label
+            type: string
+          - name: topics
+            label: Topic choices
+            type: string
+            list: true
+          - name: message_label
+            label: Message - label
+            type: string
+          - name: message_placeholder
+            label: Message - hint text
+            type: string
+          - name: button
+            label: Send button
+            type: string
+          - name: note
+            label: Note under the button
+            type: string
+      - name: seo_title
+        label: Browser tab title
+        type: string
+      - name: seo_description
+        label: Search engine description
+        type: text
+      - name: share_description
+        label: Link preview text
+        type: string
+
+  - name: site
+    label: Site settings (name, email, menu, social links)
+    type: file
+    path: _data/site.yml
+    format: yaml
+    fields:
+      - name: name
+        label: Your name (top bar and footer)
+        type: string
+      - name: email
+        label: Email (contact form delivers here)
+        type: string
+      - name: footer_tagline
+        label: Footer line
+        type: string
+      - name: nav_home
+        label: Menu - Home
+        type: string
+      - name: nav_works
+        label: Menu - Works
+        type: string
+      - name: nav_about
+        label: Menu - About
+        type: string
+      - name: nav_contact
+        label: Menu - Contact
+        type: string
+      - name: social
+        label: Social links (shown in the footer)
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Name (like YouTube)
+            type: string
+          - name: url
+            label: Link
+            type: string

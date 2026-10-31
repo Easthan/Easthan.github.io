@@ -1,0 +1,60 @@
+seo_title: "Ethan Stirnemann — Composer & Producer"
+seo_description: "Ethan Stirnemann is a composer, producer, and sound designer in Knoxville, Tennessee, writing for the concert hall, the studio, film, and games."
+share_description: "Music for the concert hall, the studio, and the screen."
+
+roles: "Composer / Producer / Sound Designer"
+first_name: Ethan
+last_name: Stirnemann
+intro: "Writing music for traditional instruments, electronics, films, and games."
+featured_track:
+  title: Regret
+  details: "piano trio · 2024"
+  file: /assets/audio/regret-piano-trio.mp3
+  duration: "5:39"
+button_work: View my work
+button_contact: Get in touch
+hero_photo: /assets/img/studio-portrait-1600.webp
+hero_photo_alt: "Ethan Stirnemann smiling in headphones at a laptop and MIDI keyboard, with a grand piano behind him"
+hero_photo_credit: "Photo: Austin Orr"
+
+selected_label: Selected work
+selected_headline: "Scores, games, and *sound*."
+selected_link: All work
+
+areas_label: What I do
+areas_headline: "Acoustic writing, electronic tools, music for *picture* and *play*."
+areas:
+  - title: Composition
+    text: "Chamber and concert music."
+    filter: concert
+  - title: Electronic Music
+    text: "Production and sound design in Ableton Live, Phase Plant, and Max/MSP, plus fixed-media and audiovisual pieces."
+    filter: electronic
+  - title: Film Scoring
+    text: "Writing to picture, including a new score for scenes from Andrew Huang’s *SPACETIME*."
+    filter: screen
+  - title: Game Audio
+    text: "Music and sound effects for games, from a 2D platformer to a quickdraw duel."
+    filter: screen
+
+band_photo: /assets/img/keys-side-1600.webp
+band_photo_alt: "Close-up of hands playing a red MIDI keyboard beside a laptop and audio interface"
+band_quote: "I’m most at home where *acoustic writing* meets electronic sound."
+
+about_photo: /assets/img/keys-close-900.webp
+about_photo_alt: "Hands on the keys and pads of a compact MIDI keyboard"
+about_label: About
+about_headline: "Composer and producer based in *Knoxville*."
+about_text: "I’m studying composition at the University of Tennessee, where my work moves between chamber music, electronic production, and scoring for film and games. I perform with the UTK Electroacoustic Ensemble and spend most of my studio time in Ableton Live."
+about_link: Read my full bio
+
+cta_label: Work with me
+cta_headline: "Have a project that needs *music*?"
+cta_text: ""
+cta_list:
+  - "Film & media scoring"
+  - "Game music & sound effects"
+  - "Concert commissions"
+  - "Electronic production"
+cta_button: Start a conversation
+cta_button_2: See my work

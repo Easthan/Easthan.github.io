@@ -1,0 +1,11 @@
+# Site settings for GitHub Pages (Jekyll).
+# All page text lives in the _data folder, editable in Pages CMS.
+title: Ethan Stirnemann
+url: https://easthan.github.io
+baseurl: ""
+markdown: kramdown
+exclude:
+  - notes
+  - README.md
+  - Gemfile
+  - Gemfile.lock

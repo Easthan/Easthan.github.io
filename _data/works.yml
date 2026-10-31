@@ -1,0 +1,146 @@
+# Each entry is one card on the Works page (in this order).
+# media: audio, video, or photo.  category: concert, screen, electronic, or improvisation.
+- title: Regret
+  title_note: ""
+  category: concert
+  label: "Concert music · piano trio"
+  description: "A piano trio from 2024, performed on the New Sounds concert series at the University of Tennessee School of Music."
+  home_description: ""
+  credit: ""
+  media: audio
+  file: /assets/audio/regret-piano-trio.mp3
+  poster: ""
+  badge: Live recording
+  detail: Piano trio
+  year: "2024"
+  duration: "5:39"
+  status: ""
+  wide: true
+  on_home: false
+
+- title: "SPACETIME, re-scored"
+  title_note: ""
+  category: screen
+  label: Film scoring
+  description: "A new score written to picture for scenes from Andrew Huang’s *SPACETIME*, made for my Film Scoring class."
+  home_description: "A new score for scenes from Andrew Huang’s *SPACETIME*, written to picture."
+  credit: "Picture: *SPACETIME* by Andrew Huang. Music: Ethan Stirnemann."
+  media: video
+  file: /assets/video/spacetime-rescore.mp4
+  poster: /assets/img/posters/spacetime.webp
+  badge: ""
+  detail: Scoring to picture
+  year: "2026"
+  duration: "1:00"
+  status: ""
+  wide: false
+  on_home: true
+
+- title: Quickdraw
+  title_note: ""
+  category: screen
+  label: "Game audio · sound design"
+  description: "Re-scoring and sound effects for a quickdraw duel game. This one is mostly about sound design and timing."
+  home_description: "Re-scoring and sound effects for a quickdraw duel game."
+  credit: ""
+  media: video
+  file: /assets/video/quickdraw-game-audio.mp4
+  poster: /assets/img/posters/quickdraw.webp
+  badge: ""
+  detail: "Sound effects & music"
+  year: "2026"
+  duration: "0:22"
+  status: ""
+  wide: false
+  on_home: true
+
+- title: 2D Platformer
+  title_note: ""
+  category: screen
+  label: Game audio
+  description: "All of the music and sound effects you hear in this 2D platformer template game, from the soundtrack to every jump and pickup."
+  home_description: ""
+  credit: ""
+  media: video
+  file: /assets/video/platformer-game-audio.mp4
+  poster: /assets/img/posters/platformer.webp
+  badge: ""
+  detail: "Music & sound effects"
+  year: "2026"
+  duration: "2:15"
+  status: ""
+  wide: false
+  on_home: false
+
+- title: Hypnagogic Engine
+  title_note: working title
+  category: electronic
+  label: "Fixed media · audiovisual"
+  description: "A hypnotic fixed-media piece in progress. I took an AI-generated image of a futuristic cube world and edited it in DaVinci Resolve until it became an endless, slowly opening pattern: vaguely mechanical, never quite readable. The music pulls you in the same way."
+  home_description: "A hypnotic, slowly opening world of machine-like patterns, with music to match."
+  credit: ""
+  media: video
+  file: /assets/video/hypnagogic-engine.mp4
+  poster: /assets/img/posters/hypnagogic-engine.webp
+  badge: ""
+  detail: "Music & video edit"
+  year: "2026"
+  duration: "3:22"
+  status: In progress
+  wide: false
+  on_home: true
+
+- title: Silhouettes Down the Fretboard
+  title_note: ""
+  category: electronic
+  label: Electronic music
+  description: "An original track, written and produced in Ableton Live."
+  home_description: ""
+  credit: ""
+  media: audio
+  file: /assets/audio/silhouettes-down-the-fretboard.mp3
+  poster: ""
+  badge: Ableton Live
+  detail: Production
+  year: "2026"
+  duration: "4:23"
+  status: ""
+  wide: false
+  on_home: false
+
+- title: "Automation & Waveform Study"
+  title_note: ""
+  category: electronic
+  label: Sound design
+  description: "A short sketch exploring automation and basic waveforms with the Phase Plant synth in Ableton Live."
+  home_description: ""
+  credit: ""
+  media: audio
+  file: /assets/audio/automation-waveform-study.mp3
+  poster: ""
+  badge: Sketch
+  detail: Phase Plant
+  year: "2026"
+  duration: "2:03"
+  status: ""
+  wide: false
+  on_home: false
+
+- title: UTK Electroacoustic Ensemble
+  title_note: ""
+  category: electronic
+  label: Live electronics
+  description: "Performing new electroacoustic music with the University of Tennessee’s Electroacoustic Ensemble, on campus and around Knoxville."
+  home_description: ""
+  credit: ""
+  media: photo
+  file: /assets/img/keys-side-900.webp
+  poster: ""
+  alt: "Ethan's hands on a MIDI keyboard during an Electroacoustic Ensemble session"
+  badge: Ensemble member
+  detail: "Keys & electronics"
+  year: ""
+  duration: ""
+  status: "Next: Pilot Light, Nov 2"
+  wide: false
+  on_home: false

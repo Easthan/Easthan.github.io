@@ -3,8 +3,8 @@
   when: ""
   title: UTK Electroacoustic Ensemble
   place: "Pilot Light · Knoxville, TN"
-  show_on_home: true
-  home_text: "UTK Electroacoustic Ensemble, live at Pilot Light · Knoxville"
+  show_on_home: false
+  home_text: ""
 
 - date: 2024-11-12
   when: Nov 2024

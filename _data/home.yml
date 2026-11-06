@@ -7,10 +7,10 @@ first_name: Ethan
 last_name: Stirnemann
 intro: "Writing music for traditional instruments, electronics, films, and games."
 featured_track:
-  title: Regret
-  details: "piano trio · 2024"
-  file: /assets/audio/regret-piano-trio.mp3
-  duration: "5:39"
+  title: Silhouettes Down the Fretboard
+  details: "electronic · 2026"
+  file: /assets/audio/silhouettes-down-the-fretboard.mp3
+  duration: "4:23"
 button_work: View my work
 button_contact: Get in touch
 hero_photo: /assets/img/studio-portrait-1600.webp

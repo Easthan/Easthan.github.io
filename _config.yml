@@ -4,7 +4,7 @@ title: Ethan Stirnemann
 url: https://easthan.github.io
 baseurl: ""
 # GoatCounter analytics code (the part before .goatcounter.com). Leave blank to turn off.
-goatcounter: ethanstirnemann
+goatcounter: easthan
 markdown: kramdown
 exclude:
   - notes
